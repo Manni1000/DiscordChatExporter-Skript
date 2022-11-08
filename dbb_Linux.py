@@ -37,7 +37,7 @@ print(token)
 print(parent_dir)
 print(partition)
 
-#ladt liste aller beigetretenen server herunter
+#downlods list of joined servers
 get_guild_list = 'dotnet DiscordChatExporter.Cli.dll guilds --token ' + token +' > .//guilds.txt'
 
 p = subprocess.Popen(get_guild_list, stdout=subprocess.PIPE, text=True, shell=True)
@@ -55,7 +55,8 @@ with open(file_path, 'r') as a:
             if elements == 'guildid:':
                 guildid = Data1
             
-                #lädt jeweilige channel liste runter und speichert sie als txt datei ab
+                #downloads channel list of the matching server and saves it in a txt file
+               
                     
                 get_dfc_channel_list = 'dotnet DiscordChatExporter.Cli.dll channels --guild ' + guildid + ' --token ' + token +' > .//channels.txt'
 
