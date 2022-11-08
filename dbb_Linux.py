@@ -6,6 +6,7 @@ from datetime import timedelta
 
 #this is a test
 #test 2
+#test3
 guildid = ''
 token = ''
 partition = ''
