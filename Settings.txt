@@ -1,0 +1,14 @@
+Dont write extra stuff into the text file this can brake the sript :o
+put your discord token here
+token: 
+
+how manny messages are in one html file (too many causes lagg)
+messages: 1000
+
+change the \ to / in the path also dont put spaces into the path and put a / on the end of the path
+
+path:
+
+put your the ids of the discord guilds you want to downlode
+
+guildid: 
