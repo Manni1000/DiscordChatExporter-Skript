@@ -4,6 +4,8 @@ import os.path
 from datetime import date
 from datetime import timedelta
 
+#this is a test
+#test 2
 guildid = ''
 token = ''
 partition = ''
