@@ -1,3 +1,4 @@
+import json
 import subprocess
 import os
 import os.path
@@ -11,6 +12,7 @@ partition = ''
 parent_dir = ''
 settingsfilename = "Settings.txt"
 settingspath = './/'
+ActivateCli = 'dotnet .//DiscordChatExporter/DiscordChatExporter.Cli.dll '
 
 #rerad settings from Settings.txt
 file_path = os.path.join(settingspath, settingsfilename)
@@ -39,10 +41,38 @@ print(parent_dir)
 print(partition)
 
 #downlods list of joined servers
-get_guild_list = 'dotnet .//DiscordChatExporter/DiscordChatExporter.Cli.dll guilds --token ' + token +' > .//guilds.txt'
+guildidlist = ''
+get_guild_list = ActivateCli + 'guilds --token ' + token #+' > .//guilds.txt'
 
-p = subprocess.Popen(get_guild_list, stdout=subprocess.PIPE, text=True, shell=True)
+p = subprocess.Popen([get_guild_list], stdout=subprocess.PIPE, text=True, shell=True)
+lines0 = p.stdout.readlines()
 p.wait()
+
+print('zweite')
+print(lines0)
+
+
+stuffremover1 = [w.replace(' ', '') for w in lines0]
+stuffremover2 = [w.replace('\n', '') for w in stuffremover1]
+
+print('zwei')
+print(stuffremover2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 print('downloded list of all joined guilds to find the selected guild name')
 print(p.stdout)
 with open(file_path, 'r') as a:
@@ -59,7 +89,7 @@ with open(file_path, 'r') as a:
                 #downloads channel list of the matching server and saves it in a txt file
                
                     
-                get_dfc_channel_list = 'dotnet .//DiscordChatExporter/DiscordChatExporter.Cli.dll channels --guild ' + guildid + ' --token ' + token +' > .//channels.txt'
+                get_dfc_channel_list = ActivateCli + 'channels --guild ' + guildid + ' --token ' + token +' > .//channels.txt'
 
                 p = subprocess.Popen(get_dfc_channel_list, shell=True)
                 p.wait()
@@ -146,7 +176,7 @@ with open(file_path, 'r') as a:
                                         date_from_txt_file = line
                                         
 
-                                csf = 'dotnet .//DiscordChatExporter/DiscordChatExporter.Cli.dll export --channel ' + channelid + ' --token ' + token + ' --media true --reuse-media true --partition ' + partition + ' --after ' + date_from_txt_file  + ' --before ' + yesterday_format + ' -o ' + path
+                                csf = ActivateCli + 'export --channel ' + channelid + ' --token ' + token + ' --media true --reuse-media true --partition ' + partition + ' --after ' + date_from_txt_file  + ' --before ' + yesterday_format + ' -o ' + path
 
                                 p = subprocess.Popen(csf, shell=True)
                                 p.wait()
@@ -158,7 +188,7 @@ with open(file_path, 'r') as a:
                                 #lädt erstes backub herunter
                                 
 
-                                create_first_file = 'dotnet .//DiscordChatExporter/DiscordChatExporter.Cli.dll export --channel ' + channelid + ' --token ' + token + ' --media true --reuse-media true --partition ' + partition + ' --before ' + yesterday_format + ' -o ' + path
+                                create_first_file = ActivateCli + 'export --channel ' + channelid + ' --token ' + token + ' --media true --reuse-media true --partition ' + partition + ' --before ' + yesterday_format + ' -o ' + path
 
                                 p = subprocess.Popen(create_first_file, shell=True)
                                 p.wait()
